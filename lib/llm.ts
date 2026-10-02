@@ -73,7 +73,7 @@ export async function generate(
       const reply = await callOpenAICompatible(
         GEMINI_URL,
         geminiKey,
-        process.env.GEMINI_MODEL || "gemini-2.0-flash",
+        process.env.GEMINI_MODEL || "gemini-3.8-flash",
         messages
       );
       return { reply, provider: "gemini" };
