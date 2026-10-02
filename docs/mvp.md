@@ -153,12 +153,14 @@ These are known and okay — an MVP is meant to be rough in places:
 
 ## What's next
 
-In rough priority order:
+The full step-by-step plan lives in **[roadmap.md](roadmap.md)**. In short:
 
-1. **Remember *you*** — a running summary of long chats, plus long-term facts (like "favorite era = Mughals") that carry across every future conversation.
+1. **Remember *you*** — long-term facts (like "favorite era = Mughals") that carry across every future conversation, plus a running summary of long chats.
 2. **Modes** — switch between just chatting, debating, fact-checking a myth, or going deep on a topic.
 3. **Feels premium** — a natural voice, faster replies (it starts talking sooner), and a nicer animated orb.
 4. **A simple lock** on the link before sharing it publicly.
+
+See [roadmap.md](roadmap.md) for the "simple now → RAG later" memory plan in depth.
 
 ---
 

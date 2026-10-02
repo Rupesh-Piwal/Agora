@@ -2,7 +2,7 @@
 
 A voice buddy for history nerds who have no one to argue with. It talks history with you — has opinions, pushes back, and (soon) remembers you. Built to run free on Vercel.
 
-**📖 Full write-up:** [docs/mvp.md](docs/mvp.md) — what we built, why, how it works, and diagrams (plain English, no jargon).
+**📖 Docs:** [docs/mvp.md](docs/mvp.md) — what we built & why (with diagrams) · [docs/roadmap.md](docs/roadmap.md) — the step-by-step plan for what's next.
 
 ## Stack (v1)
 
