@@ -1,0 +1,16 @@
+
+> agora@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.8 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.7:3000
+- Environments: .env.local
+✓ Ready in 488ms
+✓ Running next.config.ts took 45ms
+
+ GET / 200 in 2.0s (next.js: 1899ms, application-code: 133ms)
+ POST /api/chat 502 in 408ms (next.js: 279ms, application-code: 129ms)
+  Reload env: .env.local
+ POST /api/chat 200 in 1291ms (next.js: 25ms, application-code: 1266ms)
+ GET / 200 in 113ms (next.js: 44ms, application-code: 69ms)

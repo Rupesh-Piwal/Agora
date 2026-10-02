@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+/* Agora — a single dark "ink" world: navy ground, manuscript gold + teal accents. */
+:root {
+  --bg: #0e1522;
+  --surface: #152032;
+  --surface-2: #1b2738;
+  --line: #2a384b;
+  --fg: #e6eaf0;
+  --muted: #8a99ad;
+  --gold: #e0a24a;
+  --teal: #54c6d2;
+  --danger: #e6796e;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-foreground: var(--fg);
+  --color-muted: var(--muted);
+  --color-gold: var(--gold);
+  --color-teal: var(--teal);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html, body {
+  height: 100%;
+}
+body {
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #16263c 0%, transparent 60%),
+    var(--bg);
+  color: var(--fg);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+/* orb states */
+@keyframes orb-idle   { 0%,100% { transform: scale(1);    } 50% { transform: scale(1.02); } }
+@keyframes orb-listen { 0%,100% { transform: scale(1);    } 50% { transform: scale(1.08); } }
+@keyframes orb-think  { to { transform: rotate(360deg); } }
+@keyframes orb-speak  { 0%,100% { transform: scale(1);    } 50% { transform: scale(1.05); } }
+@keyframes ring-pulse { 0% { opacity:.6; transform: scale(1); } 100% { opacity:0; transform: scale(1.6); } }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; }
+}
