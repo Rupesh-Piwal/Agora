@@ -103,3 +103,15 @@
  GET / 200 in 104ms (next.js: 17ms, application-code: 87ms)
 ✓ Compiled in 69ms
  GET / 200 in 57ms (next.js: 12ms, application-code: 44ms)
+✓ Compiled in 59ms
+ GET / 200 in 59ms (next.js: 13ms, application-code: 46ms)
+  Reload env: .env.local
+ GET / 200 in 130ms (next.js: 92ms, application-code: 38ms)
+ POST /api/chat 200 in 787ms (next.js: 83ms, application-code: 705ms)
+ GET /api/history?sessionId=test 200 in 195ms (next.js: 188ms, application-code: 7ms)
+  Reload env: .env.local
+ GET / 200 in 131ms (next.js: 60ms, application-code: 72ms)
+ POST /api/chat 200 in 2.4s (next.js: 71ms, application-code: 2.4s)
+ GET /api/history?sessionId=0d3ed25b-bfc4-401f-980f-4c92152e09d7 200 in 232ms (next.js: 21ms, application-code: 211ms)
+ POST /api/chat 200 in 876ms (next.js: 2.0ms, application-code: 874ms)
+ GET /api/history?sessionId=0d3ed25b-bfc4-401f-980f-4c92152e09d7 200 in 513ms (next.js: 3ms, application-code: 510ms)

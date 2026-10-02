@@ -2,6 +2,8 @@
 
 A voice buddy for history nerds who have no one to argue with. It talks history with you — has opinions, pushes back, and (soon) remembers you. Built to run free on Vercel.
 
+**📖 Full write-up:** [docs/mvp.md](docs/mvp.md) — what we built, why, how it works, and diagrams (plain English, no jargon).
+
 ## Stack (v1)
 
 - **Next.js 16** (App Router) + TypeScript + Tailwind v4
