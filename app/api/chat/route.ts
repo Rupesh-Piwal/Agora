@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generate, type ChatMessage } from "@/lib/llm";
+import { createSession, addMessages } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   if (!process.env.GROQ_API_KEY && !process.env.GEMINI_API_KEY) {
@@ -10,9 +11,11 @@ export async function POST(req: NextRequest) {
   }
 
   let messages: ChatMessage[];
+  let sessionId: string | null;
   try {
     const body = await req.json();
     messages = Array.isArray(body?.messages) ? body.messages : [];
+    sessionId = typeof body?.sessionId === "string" ? body.sessionId : null;
   } catch {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
   }
@@ -20,13 +23,28 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "No messages provided." }, { status: 400 });
   }
 
+  let reply: string;
+  let provider: string;
   try {
-    const { reply, provider } = await generate(messages);
-    return NextResponse.json({ reply, provider });
+    ({ reply, provider } = await generate(messages));
   } catch (err) {
     return NextResponse.json(
       { error: "All model providers failed.", detail: String(err) },
       { status: 502 }
     );
   }
+
+  // Persist this turn (no-ops silently if Supabase isn't configured).
+  const lastUser = [...messages].reverse().find((m) => m.role === "user");
+  if (lastUser) {
+    if (!sessionId) sessionId = await createSession(lastUser.content);
+    if (sessionId) {
+      await addMessages(sessionId, [
+        { role: "user", content: lastUser.content },
+        { role: "assistant", content: reply },
+      ]);
+    }
+  }
+
+  return NextResponse.json({ reply, provider, sessionId });
 }

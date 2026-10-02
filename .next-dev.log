@@ -72,3 +72,34 @@
  GET / 200 in 75ms (next.js: 10ms, application-code: 65ms)
  GET / 200 in 75ms (next.js: 48ms, application-code: 27ms)
   Reload env: .env.local
+ GET / 200 in 171ms (next.js: 73ms, application-code: 98ms)
+ GET / 200 in 273ms (next.js: 141ms, application-code: 132ms)
+ GET / 200 in 280ms (next.js: 205ms, application-code: 75ms)
+ GET / 200 in 42ms (next.js: 13ms, application-code: 30ms)
+ GET / 200 in 103ms (next.js: 10ms, application-code: 92ms)
+ GET / 200 in 55ms (next.js: 12ms, application-code: 43ms)
+ POST /api/chat 200 in 809ms (next.js: 30ms, application-code: 779ms)
+✓ Compiled in 340ms
+ GET / 200 in 55ms (next.js: 7ms, application-code: 47ms)
+ GET / 200 in 116ms (next.js: 52ms, application-code: 64ms)
+ GET / 200 in 54ms (next.js: 5ms, application-code: 49ms)
+ GET / 200 in 52ms (next.js: 5ms, application-code: 48ms)
+ GET / 200 in 51ms (next.js: 4ms, application-code: 47ms)
+ GET / 200 in 55ms (next.js: 4ms, application-code: 51ms)
+ GET / 200 in 64ms (next.js: 5ms, application-code: 59ms)
+ GET / 200 in 79ms (next.js: 6ms, application-code: 72ms)
+ GET / 200 in 89ms (next.js: 6ms, application-code: 83ms)
+ GET / 200 in 85ms (next.js: 5ms, application-code: 80ms)
+ GET / 200 in 83ms (next.js: 6ms, application-code: 77ms)
+ GET / 200 in 78ms (next.js: 9ms, application-code: 69ms)
+ GET / 200 in 39ms (next.js: 8ms, application-code: 32ms)
+✓ Compiled in 38ms
+ GET / 200 in 85ms (next.js: 11ms, application-code: 74ms)
+✓ Compiled in 48ms
+ GET / 200 in 45ms (next.js: 10ms, application-code: 35ms)
+✓ Compiled in 55ms
+ GET / 200 in 33ms (next.js: 9ms, application-code: 24ms)
+✓ Compiled in 39ms
+ GET / 200 in 104ms (next.js: 17ms, application-code: 87ms)
+✓ Compiled in 69ms
+ GET / 200 in 57ms (next.js: 12ms, application-code: 44ms)

@@ -9,6 +9,7 @@ type Status = "idle" | "listening" | "transcribing" | "thinking" | "speaking";
 const SILENCE_MS = 1400; // stop this long after you stop talking
 const MAX_RECORD_MS = 25000; // hard cap
 const SPEECH_RMS = 0.015; // volume threshold that counts as "talking"
+const SESSION_KEY = "agora_session";
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -23,6 +24,7 @@ export default function Home() {
   const chunksRef = useRef<Blob[]>([]);
   const messagesRef = useRef<Message[]>(messages);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const sessionIdRef = useRef<string | null>(null);
 
   useEffect(() => {
     messagesRef.current = messages;
@@ -35,6 +37,25 @@ export default function Home() {
       !!navigator.mediaDevices?.getUserMedia &&
       typeof window.MediaRecorder !== "undefined";
     setSupported(ok);
+  }, []);
+
+  // Restore the saved conversation from the DB on load.
+  useEffect(() => {
+    let sid: string | null = null;
+    try {
+      sid = localStorage.getItem(SESSION_KEY);
+    } catch {}
+    if (!sid) return;
+    sessionIdRef.current = sid;
+    (async () => {
+      try {
+        const res = await fetch(`/api/history?sessionId=${encodeURIComponent(sid)}`);
+        const data = await res.json();
+        if (Array.isArray(data?.messages) && data.messages.length > 0) {
+          setMessages(data.messages);
+        }
+      } catch {}
+    })();
   }, []);
 
   function pickMime(): string {
@@ -172,13 +193,19 @@ export default function Home() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: next }),
+        body: JSON.stringify({ messages: next, sessionId: sessionIdRef.current }),
       });
       const data = await res.json();
       if (!res.ok) {
         setError(data?.error || "Something went wrong.");
         setStatus("idle");
         return;
+      }
+      if (data.sessionId && data.sessionId !== sessionIdRef.current) {
+        sessionIdRef.current = data.sessionId;
+        try {
+          localStorage.setItem(SESSION_KEY, data.sessionId);
+        } catch {}
       }
       const reply: string = data.reply;
       setMessages((m) => [...m, { role: "assistant", content: reply }]);
@@ -223,6 +250,18 @@ export default function Home() {
     startListening();
   }
 
+  function newChat() {
+    window.speechSynthesis?.cancel();
+    if (recorderRef.current?.state === "recording") recorderRef.current.stop();
+    setMessages([]);
+    setError(null);
+    setStatus("idle");
+    sessionIdRef.current = null;
+    try {
+      localStorage.removeItem(SESSION_KEY);
+    } catch {}
+  }
+
   const orbAnim =
     status === "listening"
       ? "orb-listen 1s ease-in-out infinite"
@@ -251,6 +290,14 @@ export default function Home() {
         <span className="font-mono text-sm tracking-wide text-muted">
           Agora <span className="text-fg">· talk history</span>
         </span>
+        {messages.length > 0 && (
+          <button
+            onClick={newChat}
+            className="ml-auto rounded-full border border-line px-3 py-1 font-mono text-xs text-muted transition-colors hover:border-teal hover:text-teal"
+          >
+            New chat
+          </button>
+        )}
       </header>
 
       <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto py-2">
